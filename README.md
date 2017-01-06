@@ -24,7 +24,7 @@ I wrote test code in the main function and recorded all the results and importan
 <br/><br/>
 Tomcat web server
 --------
-This program uses Tomcat as web container and NewBuzzWebsite was developed for displaying the searched information. According to MVC model, the data searching is process by Servlet and the display view is in the JSP. The servlet invokes web crawler to search all the information and then transfers those searched data to JSP page. Jsp page uses these data to form a dynamic web page. 
+This program uses Tomcat as web container and NewBuzzWebsite(webcontext) was developed for displaying the searched information. According to MVC model, the data searching is process by Servlet(SearchNews.java) and the display view is in the JSP(TrumpVsClinton.jsp). The servlet invokes the web crawler to search all the information and transfers these data to JSP page which will use them to form a dynamic web page. The web page use Bootstrap as its CSS template.
 
 
 
