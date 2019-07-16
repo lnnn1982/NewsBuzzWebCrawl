@@ -118,7 +118,7 @@ public class Spider {
 
 	//search level
 	private int curSearchLevel = 0;
-	private static final int maxSearchLevel = 200;
+	private static final int maxSearchLevel = 30;
 
 	//in case of website's block 
 	private static final int searchDelay = 10;
@@ -134,6 +134,9 @@ public class Spider {
 	static
 	{
 		try {        
+			//myLogger.setLevel(Level.SEVERE);
+			myLogger.setUseParentHandlers(false);
+			
 			FileHandler fileHandler = new FileHandler("spider.log"); 
 	        fileHandler.setLevel(Level.INFO); 
 	        fileHandler.setFormatter(new MyLogHander()); 
@@ -279,10 +282,10 @@ public class Spider {
 	        URL absURL = abs.toURL();
 	        abUrl = absURL.toString();  
 	    } catch (Exception e) {  
-	        e.printStackTrace();  
+	        //e.printStackTrace();  
 	    } 
 	    
-		myLogger.info("######relative url. baseUri:" + baseURI + ",relativePath"
+		myLogger.info("######getAbsoluteURL url. baseUri:" + baseURI + ",relativePath:"
 				+ relativePath + ", abUrl:" + abUrl);
 	    return abUrl;
 	} 
@@ -343,6 +346,7 @@ public class Spider {
 		while(matcher.find()) {
             String uri = matcher.group(1).trim();
             
+            myLogger.info("uri:" + uri);
             if (uri.startsWith("/")) {
             	addSearchUrl(baseUrl + uri);
 			} 
@@ -363,6 +367,8 @@ public class Spider {
 	}
 	
 	private void addSearchUrl(String orgUrl) {
+		if(orgUrl == null) return;
+		
 		if ((!orgUrl.isEmpty()) && (!visitedUrls.contains(orgUrl))) {	
 			if (isNeedSearch(orgUrl)) {		
 				if (isSearchRelevant(orgUrl)) {
